@@ -80,6 +80,36 @@ npm run dev
 
 The frontend will run on `http://localhost:5173`
 
+### Docker Setup (Recommended for Production)
+
+The easiest way to run the entire application is using Docker Compose:
+
+1. Make sure Docker and Docker Compose are installed on your system
+
+2. Create a `.env` file in the root directory:
+```bash
+JWT_SECRET_KEY=your-strong-secret-key-here
+```
+
+3. Build and run the containers:
+```bash
+docker-compose up --build
+```
+
+4. Access the application:
+   - Frontend: `http://localhost`
+   - Backend API: `http://localhost:5000`
+
+5. To stop the containers:
+```bash
+docker-compose down
+```
+
+To run in detached mode (background):
+```bash
+docker-compose up -d
+```
+
 ## Security Notes
 
 - Never commit `.env` files to version control
@@ -132,6 +162,18 @@ medconnect/
 - Vite
 - Vue I18n (internationalization)
 
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on how to:
+- Report bugs
+- Suggest features
+- Submit pull requests
+- Follow our code style
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for a detailed history of changes.
+
 ## License
 
-This project is for educational purposes.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

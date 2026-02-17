@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: medconnect-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-change-this-secret-key}
+      - DATABASE_URL=sqlite:///data/database.db
+    volumes:
+      - backend-data:/app/data
+    restart: unless-stopped
+    networks:
+      - medconnect-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_BASE_URL=http://localhost:5000
+    container_name: medconnect-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - medconnect-network
+
+volumes:
+  backend-data:
+    driver: local
+
+networks:
+  medconnect-network:
+    driver: bridge
